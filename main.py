@@ -1,15 +1,14 @@
 import math
 import time
 
-# Generación del alfabeto Base 64 con la Ñ y ñ en su posición correcta
 digitos_ascii = "".join(chr(i) for i in range(48, 58))  # 0-9 (10)
 
-# Mayúsculas: A-N (65-78), Ñ (209), O-Z (79-90) -> 27 caracteres
+# A-N (65-78), Ñ (209), O-Z (79-90)
 mayus_antes = "".join(chr(i) for i in range(65, 79))
 mayus_despues = "".join(chr(i) for i in range(79, 91))
 mayusculas = mayus_antes + chr(209) + mayus_despues
 
-# Minúsculas: a-n (97-110), ñ (241), o-z (111-122) -> 27 caracteres
+# a-n (97-110), ñ (241), o-z (111-122 -> 27 caracteres
 minus_antes = "".join(chr(i) for i in range(97, 111))
 minus_despues = "".join(chr(i) for i in range(111, 123))
 minusculas = minus_antes + chr(241) + minus_despues
@@ -21,7 +20,7 @@ def contar_y_convertir():
     while True:
         print("\n=== SISTEMA DE CONTEO UNIVERSAL ===")
 
-        # Entrada de datos
+        # Entrada
         try:
             R = int(input("Ingrese R (Cantidad inicial de dígitos): "))
             C = int(input("Ingrese C (Número total de conteos): "))
@@ -47,14 +46,13 @@ def contar_y_convertir():
         else:
             print(f"\n[OK] Capacidad suficiente. El sistema soporta los conteos con R={R}.\n")
 
-        # Inicialización del sistema
         digitos = [0] * R
 
         encabezado = " | ".join([f"D{i}" for i in range(R - 1, -1, -1)])
         print(encabezado)
         print("-" * len(encabezado))
 
-        # Bucle de conteo (Odómetro)
+        # Conteo
         for paso in range(1, C + 1):
             digitos[0] += 1
 
@@ -76,8 +74,7 @@ def contar_y_convertir():
 
         print()
 
-        # 1. GUÍA VISUAL DEL ALFABETO BASE 64 COMPLETO
-        print("\n" + "=" * 15 + " GUÍA VISUAL DEL ALFABETO BASE 64 " + "=" * 15)
+        print("\n" + "=" * 15 + " ALFABETO BASE 64 " + "=" * 15)
         print(" Digitos (0-9):    " + " ".join([f"{i}:{ALFABETO[i]}" for i in range(10)]))
         print(" Mayús   (10-36):  " + " ".join([f"{i}:{ALFABETO[i]}" for i in range(10, 37)]))
         print(" Minús   (37-63):  " + " ".join([f"{i}:{ALFABETO[i]}" for i in range(37, 64)]))
@@ -85,8 +82,7 @@ def contar_y_convertir():
 
         valor_base_10 = C
 
-        # 2. GUÍA VISUAL DEL ALFABETO DELIMITADO A LA BASE B
-        print(f"=== GUÍA VISUAL DEL ALFABETO DELIMITADO A LA BASE DESTINO (Base {B}) ===")
+        print(f"=== ALFABETO BASE N ===")
         print(f"Mostrando los {B} símbolos válidos extraídos de la Base 64 (del valor 0 al {B - 1}):")
 
         alfabeto_base_b = ALFABETO[:B]
@@ -96,7 +92,6 @@ def contar_y_convertir():
             print(f" Rango {i:2d}-{fin - 1:2d}: {bloque}")
         print("-" * 65 + "\n")
 
-        # 3. Proceso detallado de conversión a Base B
         print(f"=== PROCESO DE CONVERSIÓN A BASE {B} ===")
         temp_b = valor_base_10
         resultado_base_b = ""
@@ -118,7 +113,6 @@ def contar_y_convertir():
                 temp_b = cociente_b
                 paso_b += 1
 
-        # 4. Proceso de Verificación detallado en Base 10
         print("\n=== PROCESO DE VERIFICACIÓN EN BASE 10 ===")
         print(f"Expandiendo el número en Base {N} a Base 10 (Suma de dígitos por potencias de la base):")
 
@@ -132,13 +126,11 @@ def contar_y_convertir():
 
         resultado_base_n = "".join([ALFABETO[d] for d in reversed(digitos)])
 
-        # Resumen final
-        print("\n=== RESUMEN FINAL ===")
+        print("\n=== RESULTADO ===")
         print(f"-> Resultado final en la Base del contador (Base {N}): {resultado_base_n}")
         print(f"-> Resultado convertido a la Base destino (Base {B}): {resultado_base_b}")
         print(f"-> Verificación calculada en Base 10: {verificacion_base_10} (Valor real esperado: {valor_base_10})")
 
-        # Preguntar si se desea realizar un nuevo conteo
         print("\n" + "=" * 40)
         repetir = input("¿Deseas realizar otro conteo? (s/n): ").strip().lower()
         if repetir != 's':
