@@ -130,6 +130,8 @@ def contar_y_convertir():
 
                 ultimo_refresco = tiempo_actual
 
+            time.sleep(1 / 900)
+
         print("\n")
         input("Conteo completado. Presione ENTER para ver la conversión...")
 
